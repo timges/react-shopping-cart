@@ -1,10 +1,10 @@
 import React from "react";
 
-const CartFooter = () => {
+const CartFooter = ({copyright}) => {
   return (
     <nav className="navbar navbar-dark bg-dark">
       <a className="navbar-brand" href="#">
-        &copy; 2018
+        &copy; {copyright}
       </a>
     </nav>
   );
