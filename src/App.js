@@ -2,34 +2,45 @@ import React from "react";
 import CartHeader from "./components/CartHeader";
 import CartFooter from "./components/CartFooter";
 import CartItems from "./components/CartItems";
+import AddItem from "./components/AddItem";
+
 import "./App.css";
 
-function App() {
-  const cartItemsList = [
-    {
-      id: 1,
-      product: { id: 40, name: "Mediocre Iron Watch", priceInCents: 399 },
-      quantity: 1
-    },
-    {
-      id: 2,
-      product: { id: 41, name: "Heavy Duty Concrete Plate", priceInCents: 499 },
-      quantity: 2
-    },
-    {
-      id: 3,
-      product: { id: 42, name: "Intelligent Paper Knife", priceInCents: 1999 },
-      quantity: 1
-    }
-  ];
+import addableItems from './data/addableItems';
+import cartList from './data/cartList';
 
-  return (
-    <div className="App">
-      <CartHeader />
-      <CartItems cartData={cartItemsList}/>
-      <CartFooter copyright="2020" />
-    </div>
-  );
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      products: addableItems,
+      cartItemsList: cartList
+    };
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit(item) { 
+    //TODO: Check if item is already in cartList add them - if not increase quantity 
+    const itemWithIndex = {...item, id:this.state.cartItemsList.length+1} 
+      
+    this.setState(prevState => {
+      return {
+        cartItemsList: [...prevState.cartItemsList, itemWithIndex]
+      };
+    });
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <CartHeader />
+        <CartItems cartData={this.state.cartItemsList} />
+        <AddItem products={this.state.products} onSubmit={this.handleSubmit} />
+        <CartFooter copyright="2020" />
+      </div>
+    );
+  }
 }
 
 export default App;
