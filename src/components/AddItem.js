@@ -22,7 +22,7 @@ class AddItem extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-
+    
     const productObj =  {        
         product: this.props.products[this.state.product],
         quantity: this.state.quantity
