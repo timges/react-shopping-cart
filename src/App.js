@@ -21,13 +21,9 @@ class App extends React.Component {
   }
 
   handleSubmit(item) {
-    //TODO: Check if item is already in cartList add them - if not increase quantity
     const itemFromList = this.state.cartItemsList.filter(element => element.product.name === item.product.name)[0];  
     if (itemFromList) {
-
       this.setState({
-        // prevState.cartItemsList[prevState.cartItemsList.indexOf(itemFromList)].quantity += item.quantity;
-          // cartItemsList: prevState.cartItemsList
         cartItemsList: [
           ...this.state.cartItemsList.filter(element => element.product.name !== item.product.name),
           Object.assign({}, itemFromList , {quantity: itemFromList.quantity + item.quantity})

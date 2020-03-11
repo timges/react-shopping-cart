@@ -11,6 +11,8 @@ const CartItems = ({ cartData }) => {
       />
     );
   });
+  const totalPrice = cartData.map(item => (item.product.priceInCents * item.quantity)/100).reduce((a, b) => a + b);
+
   return (
     <div className="container">
       <h1>Cart Items</h1>
@@ -24,6 +26,7 @@ const CartItems = ({ cartData }) => {
         </div>
         {cartItemsList}
       </div>
+      <p>Total Price: ${totalPrice}</p>
     </div>
   );
 };
